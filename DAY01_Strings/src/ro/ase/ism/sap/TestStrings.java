@@ -1,6 +1,21 @@
 package ro.ase.ism.sap;
 
 public class TestStrings {
+	
+	static String getByteUnsignedHexRepresentation(byte value) {
+		String hex = Integer.toHexString(Byte.toUnsignedInt(value));
+		if(hex.length() == 1)
+			hex = "0" + hex;
+		return hex;
+	}
+	
+	static String getHexFromByteArray(byte[] values) {
+		StringBuilder sb = new StringBuilder();
+		for(byte value : values) {
+			sb.append(String.format("%02x", value));
+		}
+		return sb.toString();
+	}
 
 	public static void main(String[] args) {
 		
@@ -96,12 +111,21 @@ public class TestStrings {
 		
 		
 		//byte[] hash = {(byte)23, (byte)-23, (byte)10, (byte)5};
-		//wrong way
+		//wrong way - because small byte values are converted to a single hex symbol
 		StringBuilder sb = new StringBuilder();
 		for(int i = 0; i < hash.length; i++) {
 			sb.append(Integer.toHexString(Byte.toUnsignedInt(hash[i])));
 		}
 		System.out.println("The hash is " + sb.toString().toUpperCase());
+		
+		//ok
+		sb = new StringBuilder();
+		for(int i = 0; i < hash.length; i++) {
+			sb.append(getByteUnsignedHexRepresentation(hash[i]));
+		}
+		System.out.println("The hash is " + sb.toString().toUpperCase());
+		
+		System.out.println("The hash is " + getHexFromByteArray(hash));
 		
 	}
 
