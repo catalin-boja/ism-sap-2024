@@ -15,8 +15,8 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
-public class TestCBC {
-	
+public class TestCTR {
+
 	public static void desEncrypt(
 			String inputFile, 
 			String outputFile,
@@ -32,7 +32,7 @@ public class TestCBC {
 		FileInputStream fis = new FileInputStream(inputF);
 		FileOutputStream fos = new FileOutputStream(outputF);
 		
-		Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+		Cipher cipher = Cipher.getInstance("DES/CTR/NoPadding");
 		SecretKeySpec keySpec = new SecretKeySpec(key, "DES");
 		
 		byte[] buffer = new byte[cipher.getBlockSize()];
@@ -85,7 +85,7 @@ public class TestCBC {
 		FileInputStream fis  = new FileInputStream(inputF);
 		FileOutputStream fos = new FileOutputStream(outputF);
 		
-		Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding");
+		Cipher cipher = Cipher.getInstance("DES/CTR/NoPadding");
 		
 		//read IV
 		byte[] IV = new byte[cipher.getBlockSize()];
@@ -128,4 +128,3 @@ public class TestCBC {
 	}
 
 }
-
