@@ -1,0 +1,1 @@
+keytool -importcert -file certificate.cer -keystore keystore.jks -alias "ismasero"
